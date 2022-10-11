@@ -1,0 +1,31 @@
+{
+  "name": "enterprise-service-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "axios": "^0.24.0",
+    "cat-tools": "^1.1.3",
+    "core-js": "^3.19.3",
+    "element-ui": "^2.15.6",
+    "js-cookie": "^3.0.1",
+    "less": "^4.1.2",
+    "moment": "^2.29.1",
+    "nuxt": "^2.15.8",
+    "swiper": "^8.0.6",
+    "vue": "^2.6.14",
+    "vue-lazyload": "^1.3.3",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "less-loader": "^7.3.0"
+  }
+}
