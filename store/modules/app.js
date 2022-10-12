@@ -8,6 +8,7 @@ const state = {
   defaultRouter: null,
   device: 'desktop',
   size: Cookies.get('size') || 'medium',
+  menu: {},
 }
 
 const mutations = {
@@ -32,6 +33,10 @@ const mutations = {
     state.size = size
     Cookies.set('size', size)
   },
+  SET_MENU: (state, menu) => {
+    state.menu = menu
+    Cookies.set('menu', menu)
+  },
   SET_DEFAULT_ROUTER: (state, router) => {
     state.defaultRouter = router
     Cookies.set('defaultRouter', router)
@@ -50,6 +55,9 @@ const actions = {
   },
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
+  },
+  setMenu({ commit }, menu) {
+    commit('SET_MENU', menu)
   },
   setDefaultRouter({ commit }, router) {
     commit('SET_DEFAULT_ROUTER', router)

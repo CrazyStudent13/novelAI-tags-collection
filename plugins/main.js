@@ -18,7 +18,7 @@ import logoBar from '@/components/layouts/pageHeader/logoBar.vue'
 import navbar from '@/components/layouts/pageHeader/navbar.vue'
 import headerMenu from '@/components/layouts/pageHeader/headerMenu.vue'
 import pageFooter from '@/components/layouts/pageFooter/index.vue'
-
+import pageMenuA from '@/components/layouts/pageMenu/tempA.vue'
 
 // logo工具栏
 Vue.component('logoBar', logoBar)
@@ -31,6 +31,9 @@ Vue.component('headerMenu', headerMenu)
 
 // 页脚
 Vue.component('pageFooter', pageFooter)
+
+// 侧边菜单栏
+Vue.component('pageMenuA', pageMenuA)
 
 // 页面中需要使用的公共组件
 import pageList from '@/components/page/pageList.vue'

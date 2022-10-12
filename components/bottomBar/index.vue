@@ -1,20 +1,28 @@
 <template>
-  <commonRow :extendClass="['BG']" height="200px">
-    <div class="test">
-      <el-button class="btn" type="primary" round>{{ btnText }}</el-button>
-    </div>
-  </commonRow>
+  <div :style="{ position: fixed ? 'fixed' : '', bottom: '0', height }" class="bottomBar">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-import commonRow from '@/components/commonRow'
 export default {
-  components: { commonRow },
   props: {
     btnText: {
       type: String,
       default: () => {
         return ''
+      },
+    },
+    height: {
+      type: String,
+      default: () => {
+        return ' 64px'
+      },
+    },
+    fixed: {
+      type: Boolean,
+      default: () => {
+        return true
       },
     },
   },
@@ -27,20 +35,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.btn {
-  font-size: 22px;
-  padding: 15px 25px;
-  border-radius: 35px;
-  background: #086fe7;
-
-  border: none;
-  &:hover {
-    background: #3587e6;
-  }
-}
-.test {
-  width: 138px;
-  margin: 0 auto;
-  margin-top: 75px;
+.bottomBar {
+  width: 100%;
+  background: white;
+  z-index: 999;
 }
 </style>

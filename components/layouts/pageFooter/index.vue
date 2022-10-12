@@ -13,7 +13,6 @@
 @layoutWidth: 1170px;
 
 .pageFooter {
-  padding: 30px auto;
   background: black;
   padding: 20px 0;
 
