@@ -17,11 +17,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.css' },
     ],
-    script: [
-      {
-        src: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.js',
-      },
-    ],
+    // script: [
+    //   {
+    //     src: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.js',
+    //   },
+    // ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -66,26 +66,26 @@ export default {
     transpile: [/^element-ui/],
   },
   router: {
-    base: process.env.NODE_ENV === 'production' ? '/catportal/' : '/',
+    base: process.env.NODE_ENV === 'production' ? '/dist' : '/',
     routeNameSplitter: '/',
-    extendRoutes(routes, resolve) {
-      // 路由筛选，将components文件的路由去除，防止出意外
-      let filterArr = []
-      routes.map((item, index, arr) => {
-        if (!item.path.includes('components')) filterArr.push(item)
-      })
-      routes.splice(0)
+    // extendRoutes(routes, resolve) {
+    //   // 路由筛选，将components文件的路由去除，防止出意外
+    //   let filterArr = []
+    //   routes.map((item, index, arr) => {
+    //     if (!item.path.includes('components')) filterArr.push(item)
+    //   })
+    //   routes.splice(0)
 
-      // 插入新的路由配置
-      filterArr.map((item) => {
-        routes.push(item)
-      })
-    },
+    //   // 插入新的路由配置
+    //   filterArr.map((item) => {
+    //     routes.push(item)
+    //   })
+    // },
   },
   ssr: true,
 
   generate: {
-    dir: 'catportal',
+    dir: 'dist',
     concurrency: 10,
     interval: 100,
     crawler: false,

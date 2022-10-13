@@ -49,3 +49,7 @@ Vue.component('pageArticle', pageArticle)
 
 // 引入路由导航配置
 import './permission.js'
+
+// 添加剪贴板
+import VueClipboard from 'vue-clipboard2'
+Vue.use(VueClipboard)

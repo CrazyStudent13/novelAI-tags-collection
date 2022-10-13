@@ -29,7 +29,7 @@
           {{ selectStr }}
         </div>
         <div class="tags-operate-footer-item tags-operate-footer-btn">
-          <el-button type="primary">复制</el-button>
+          <el-button type="primary" @click="copy(selectStr)">复制</el-button>
           <el-button @click="reset">重置</el-button>
         </div>
       </div>
@@ -154,6 +154,23 @@ export default {
     // 检索当前列表
     searchData(value) {
       this.tagsTable = this.tableData.filter((data) => !value || data.label.includes(value))
+    },
+    copy(val) {
+      let that = this
+      if (!this.$devTools.isNullorUndefined(val)) {
+        this.$copyText(val || '').then(function (e) {
+          console.log(e.text)
+          that.$message({
+            message: '复制成功',
+            type: 'success',
+          })
+        })
+      } else {
+        that.$message({
+          message: '您无法复制空值',
+          type: 'error',
+        })
+      }
     },
 
     reset() {
