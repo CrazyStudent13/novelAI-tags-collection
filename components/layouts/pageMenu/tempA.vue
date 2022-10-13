@@ -1,6 +1,6 @@
 <template>
   <div class="pageSider">
-    <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu :default-active="activeMenu" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
       <el-menu-item v-for="(menu, index) in tags" :key="index" :index="menu.group_value" @click.native="handleMenuClick(menu)">
         <!-- <i class="el-icon-menu"></i> -->
         <span slot="title">
@@ -19,12 +19,20 @@ export default {
   data() {
     return {
       tags,
+      activeMenu: '',
     }
   },
   methods: {
     handleMenuClick(menu) {
       this.$store.dispatch('app/setMenu', menu)
     },
+  },
+  created() {
+    // 默认加入第一组标签
+    this.$nextTick(() => {
+      this.activeMenu = this.tags[0].group_value
+      this.handleMenuClick(this.tags[0])
+    })
   },
 }
 </script>
