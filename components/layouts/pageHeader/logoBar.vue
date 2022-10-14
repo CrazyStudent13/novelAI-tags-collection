@@ -4,46 +4,82 @@
  * @Last Modified by: chenjie2-21 14:40:27
  * @Last Modified time: 2022-10-11 20:22:19
 -->
-
 <template>
-  <div class="logo">
-    <div class="logo-body">
-      <div class="logo-body-left">
-        <slot name="logoL">
-          <!-- <img src="@/assets/img/CATLOGO.png" /> -->
-        </slot>
-      </div>
-      <div class="logo-body-right">
-        <slot name="logoR"> </slot>
-      </div>
-    </div>
+  <div class="sidebar-logo-container" :style="{ backgroundColor: sideTheme === 'theme-dark' ? variables.menuBgLogo : variables.menuLightBackground }">
+    <transition name="sidebarLogoFade">
+      <router-link class="sidebar-logo-link" to="/">
+        <h1 class="sidebar-title" :style="{ color: sideTheme === 'theme-dark' ? variables.logoTitleColor : variables.logoLightTitleColor }">{{ title }}</h1>
+      </router-link>
+    </transition>
   </div>
 </template>
 
 <script>
+import variables from '@/assets/styles/variables.less'
+
 export default {
-  data() {
-    return {}
+  name: 'SidebarLogo',
+  computed: {
+    variables() {
+      return variables
+    },
+    sideTheme() {
+      return 'theme-dark'
+    },
   },
-
-  mounted() {},
-
-  methods: {},
+  data() {
+    return {
+      title: 'TagsCollection',
+    }
+  },
 }
 </script>
 
 <style lang="less" scoped>
-.logo {
-  padding: 15px auto;
-  &-body {
-    width: 1170px;
+.sidebarLogoFade-enter-active {
+  transition: opacity 1.5s;
+}
 
-    margin: 0 auto;
+.sidebarLogoFade-enter,
+.sidebarLogoFade-leave-to {
+  opacity: 0;
+}
 
-    &-left {
+.sidebar-logo-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: #2b2f3a;
+  text-align: center;
+  overflow: hidden;
+
+  & .sidebar-logo-link {
+    height: 100%;
+    width: 100%;
+
+    & .sidebar-logo {
+      width: 32px;
+      height: 32px;
+      vertical-align: middle;
+      margin-right: 12px;
     }
 
-    &-right {
+    & .sidebar-title {
+      display: inline-block;
+      margin: 0;
+      color: #fff;
+      font-weight: 600;
+      line-height: 50px;
+      font-size: 14px;
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      vertical-align: middle;
+    }
+  }
+
+  &.collapse {
+    .sidebar-logo {
+      margin-right: 0px;
     }
   }
 }

@@ -1,11 +1,13 @@
 <template>
   <div class="tags-operate">
     <!-- 顶部标签栏 -->
-    <div class="tags-operate-header">
+    <div v-if="!$devTools.isNullorUndefined(multipleSelection)" class="tags-operate-header">
       <el-tag v-for="(tag, index) in multipleSelection" :key="index" closable style="margin: 4px 5px" @close="handleClose(tag)">
         {{ tag.label }}
       </el-tag>
     </div>
+
+    <div v-else class="tags-operate-header" style="color: #cccccc">请点击选中对应的标签</div>
 
     <div class="tags-operate-body">
       <el-table ref="multipleTable" :data="tagsTable" tooltip-effect="dark" style="width: 100%" @select="selectRow" @selection-change="handleSelectionChange">
@@ -80,6 +82,7 @@ export default {
         })
       },
       deep: true,
+      immediate: true,
     },
     // 根据当前已选中标签，生成选中的字符串
     currentMultipleSelection: {
@@ -185,12 +188,14 @@ export default {
 
 <style lang="less">
 .tags-operate {
+  border-top: 1px solid #cccc;
   &-header {
     width: 100%;
     min-height: 64px;
     line-height: 64px;
     background: white;
     padding: 8px 16px;
+    padding-top: 0px;
     margin-bottom: 16px;
   }
 

@@ -2,18 +2,20 @@
   <el-container style="background: #f5f5f5; padding: 0; height: 100vh">
     <!-- 侧边栏 -->
     <el-aside width="200px" style="background: #304156">
+      <logoBar />
       <pageMenuA />
     </el-aside>
 
     <el-main class="app" style="padding: 0">
       <!-- 顶部导航栏 -->
       <div class="app-header">
+        <headerMenu />
         <navbar />
       </div>
 
       <!-- 主体内容 -->
       <div class="app-body">
-        <nuxt :menu="currentMenu" />
+        <nuxt :key="key" />
       </div>
     </el-main>
   </el-container>
@@ -26,9 +28,9 @@ export default {
       currentMenu: [],
     }
   },
-  methods: {
-    menuChange(menu) {
-      this.currentMenu = menu.tags
+  computed: {
+    key() {
+      return this.$route.path
     },
   },
 }

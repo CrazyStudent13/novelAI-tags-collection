@@ -6,8 +6,7 @@
 -->
 
 <template>
-  <div>
-    <!-- <div class="businessContact unSelect">商务联系</div>
+  <div class="headerMenu">
     <el-menu
       class="unSelect"
       :default-active="activeIndex"
@@ -16,12 +15,12 @@
       :text-color="'#666'"
       :active-text-color="'#0568E4'"
       size="mini"
-      style="float: right"
+      style="float: right; height: 50px"
     >
-      <el-menu-item v-for="(item, index) in tabList" :index="item.path" :key="index" @click="handleSelect(item.path)">
+      <el-menu-item v-for="(item, index) in subMenuList" :index="item.label" :key="index" @click="handleSelect(item)">
         {{ item.label }}
       </el-menu-item>
-    </el-menu> -->
+    </el-menu>
   </div>
 </template>
 
@@ -29,24 +28,40 @@
 export default {
   data() {
     return {
-      activeIndex: this.$route.path,
-      tabList: [{ label: '首页', path: '/' }],
+      activeIndex: '首页',
+      subMenuList: [
+        { label: '首页', path: '/' },
+        { label: '说明', path: '/about' },
+        { label: '源码', url: 'https://github.com/CrazyStudent13/novelAI-tags-collection.git' },
+      ],
     }
   },
   methods: {
-    handleSelect(path) {
-      this.$router.push({
-        path: path,
-      })
+    handleSelect(subMenu) {
+      if (!this.$devTools.isNullorUndefined(subMenu.path)) {
+        this.$router.push({
+          path: subMenu.path,
+        })
+      } else {
+        window.open(subMenu.url)
+      }
     },
   },
-  mounted() {
-    console.log(this.$route.path)
+  created() {
+    this.handleSelect(this.subMenuList[0])
   },
 }
 </script>
 
 <style lang="less" scoped>
+.headerMenu {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: white;
+}
+
 .businessContact {
   background: linear-gradient(270deg, #fff2e1 0%, #f1d9b9 100%);
   border-radius: 16px;
