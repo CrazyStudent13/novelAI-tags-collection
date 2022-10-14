@@ -10,19 +10,25 @@
     <div v-else class="tags-operate-header" style="color: #cccccc">请点击选中对应的标签</div>
 
     <div class="tags-operate-body">
-      <el-table ref="multipleTable" :data="tagsTable" tooltip-effect="dark" style="width: 100%" @select="selectRow" @selection-change="handleSelectionChange">
+      <div style="margin: 8px 16px; margin-left: 0; margin-top: 0">
+        <el-button size="mini" @click="toggleSelection()">取消选择</el-button>
+      </div>
+      <el-table ref="multipleTable" :data="tagsTable" tooltip-effect="dark" size="mini" style="width: 100%" @select="selectRow" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"> </el-table-column>
         <el-table-column type="index" label="序号" width="55"> </el-table-column>
         <el-table-column label="标签" prop="label">
           <template slot="header">
-            <el-input v-model.trim="search" @input="searchData" size="mini" placeholder="输入关键字搜索标签" />
+            <el-input v-model.trim="search" @input="searchData" size="mini" placeholder="输入关键字筛选标签" />
           </template>
         </el-table-column>
         <el-table-column label="原词" prop="value"> </el-table-column>
+
+        <el-table-column label="操作" align="center" width="100">
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-document-copy" size="mini" style="text-align: right" @click="copy(scope.row.value)">复制</el-button>
+          </template>
+        </el-table-column>
       </el-table>
-      <div style="margin-top: 20px">
-        <el-button @click="toggleSelection()">取消选择</el-button>
-      </div>
     </div>
 
     <bottomBar :height="'160px'">
@@ -31,7 +37,7 @@
           {{ selectStr }}
         </div>
         <div class="tags-operate-footer-item tags-operate-footer-btn">
-          <el-button type="primary" @click="copy(selectStr)">复制</el-button>
+          <el-button type="primary" icon="el-icon-document-copy" @click="copy(selectStr)">复制</el-button>
           <el-button @click="reset">重置</el-button>
         </div>
       </div>
@@ -82,7 +88,6 @@ export default {
         })
       },
       deep: true,
-      immediate: true,
     },
     // 根据当前已选中标签，生成选中的字符串
     currentMultipleSelection: {
@@ -190,11 +195,14 @@ export default {
 .tags-operate {
   border-top: 1px solid #cccc;
   &-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
     width: 100%;
-    min-height: 64px;
-    line-height: 64px;
+    min-height: 60px;
+    line-height: 60px;
     background: white;
-    padding: 8px 16px;
+    padding: 0px 16px;
     padding-top: 0px;
     margin-bottom: 16px;
   }
