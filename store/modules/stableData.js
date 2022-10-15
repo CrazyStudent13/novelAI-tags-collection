@@ -1,9 +1,9 @@
 const now = new Date()
 
-const state = {
+const state = () => ({
   contractDictionary: [],
   allDictionary: null,
-}
+})
 
 const mutations = {
   SET_AllDictionary: (state, dictionary) => {

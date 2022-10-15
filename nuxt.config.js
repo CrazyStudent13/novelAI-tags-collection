@@ -14,8 +14,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.css' },
+      { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
+      // { rel: 'stylesheet', href: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.css' },
     ],
     // script: [
     //   {
@@ -64,8 +64,14 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    extend(config, { isDev }) {
+      if (!isDev) {
+        config.output.publicPath = './dist/'
+      }
+    },
   },
   router: {
+    mode: 'hash',
     base: process.env.NODE_ENV === 'production' ? '/dist' : '/',
     routeNameSplitter: '/',
     extendRoutes(routes, resolve) {
