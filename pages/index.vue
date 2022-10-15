@@ -108,6 +108,9 @@ export default {
       deep: true,
     },
   },
+  mounted() {
+    this.tagsTable = this.tableData
+  },
   methods: {
     // 移除已选标签
     handleClose(tag) {

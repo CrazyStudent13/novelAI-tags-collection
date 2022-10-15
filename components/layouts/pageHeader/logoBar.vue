@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      title: 'TagsCollection',
+      title: 'ai绘画咒术咏唱书',
     }
   },
 }
