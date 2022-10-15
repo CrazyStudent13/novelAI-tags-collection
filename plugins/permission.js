@@ -1,5 +1,5 @@
 /**
- * Author: 杨扬
+ * Author: 远川
  * Date: 2022-02-21 11:19:24
  * LastEditTime: 2022-02-21 14:28:13
  * desc: 路由导航拦截，主要用来判断登录权限
@@ -19,7 +19,7 @@ export default ({ app, store }) => {
       if (!devTools.isNullorUndefined(store.getters.token)) {
         store
           .dispatch('user/GetUserInfo')
-          .then((res) => { })
+          .then((res) => {})
           .catch((err) => {
             // 获取失败，代表token失效，清空token，鉴权中间件可以根据此来判断登录是否失效
             store.dispatch('user/LogOut')

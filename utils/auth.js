@@ -1,5 +1,5 @@
 /**
- * Author: 杨扬
+ * Author: 远川
  * Date: 2022-02-21 11:19:24
  * LastEditTime: 2022-02-21 14:29:07
  * desc: token在cookie中的存取
@@ -15,7 +15,7 @@ export function getToken() {
 }
 
 export function getTokenForAuthorization() {
-  let header = { 'Authorization': 'Bearer ' + getToken() };
+  let header = { Authorization: 'Bearer ' + getToken() }
   return header
 }
 

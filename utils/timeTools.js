@@ -1,5 +1,5 @@
 /**
- * Author: 杨扬
+ * Author: 远川
  * Date: 2022-02-21 11:19:24
  * LastEditTime: 2022-02-21 14:29:55
  * desc: 时间相关的格式化组件
@@ -15,7 +15,7 @@ export default {
    * @param startTime {String,Date} - 倒计时开始时间，默认为当前时刻
    * @return {Object}  - 计算完成后返回的年月日时分秒数值
    */
-  
+
   countDownTime(endTime, maxUnit = 'year', startTime) {
     let aUnitArr = ['year', 'month', 'day', 'hour', 'minute', 'second']
     let iMaxIndex = aUnitArr.indexOf(maxUnit)
@@ -37,5 +37,5 @@ export default {
       })
     }
     return result
-  }
+  },
 }
