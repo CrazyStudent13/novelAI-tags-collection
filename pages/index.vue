@@ -1,13 +1,14 @@
 <template>
   <div class="tags-operate">
-    <!-- 顶部标签栏 -->
-    <div v-if="!$devTools.isNullorUndefined(multipleSelection)" class="tags-operate-header">
+    <!-- 顶部标签栏(暂时先不放出来，目前这种BUG仅仅靠着前端不好处理) -->
+    <!-- <div v-if="!$devTools.isNullorUndefined(multipleSelection)" class="tags-operate-header">
       <el-tag v-for="(tag, index) in multipleSelection" :key="index" closable style="margin: 4px 5px" @close="handleClose(tag)">
-        {{ tag.label }}
+        <span>{{ tag.label }}</span>
+        <span v-if="tag.weight !== 0" style="color: black">{{ tag.weight }} </span>
       </el-tag>
     </div>
 
-    <div v-else class="tags-operate-header" style="color: #cccccc">请点击选中对应的标签</div>
+    <div v-else class="tags-operate-header" style="color: #cccccc">请点击选中对应的标签</div> -->
 
     <div class="tags-operate-body">
       <div style="margin: 8px 16px; margin-left: 0; margin-top: 0">
@@ -22,7 +23,11 @@
           </template>
         </el-table-column>
         <el-table-column label="原词" prop="value"> </el-table-column>
-
+        <el-table-column label="权重" align="center">
+          <template slot-scope="scope">
+            <el-input-number v-model.trim="scope.row.weight" size="mini" :max="10"></el-input-number>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" align="center" width="100">
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-document-copy" size="mini" style="text-align: right" @click="copy(scope.row.value)">复制</el-button>
@@ -34,7 +39,8 @@
     <bottomBar :height="'160px'">
       <div class="tags-operate-footer">
         <div class="tags-operate-footer-item">
-          {{ selectStr }}
+          <span v-if="!$devTools.isNullorUndefined(selectStr)">{{ selectStr }}</span>
+          <span v-else style="color: #cccccc">词条长度尽量不超出75位</span>
         </div>
         <div class="tags-operate-footer-item tags-operate-footer-btn">
           <el-button type="primary" icon="el-icon-document-copy" @click="copy(selectStr)">复制</el-button>
@@ -68,7 +74,9 @@ export default {
     // 获取当前选中的标签分组
     tableData() {
       let tableData = this.$devTools.isNullorUndefined(this.$store.getters.menu) ? [] : this.$store.getters.menu.tags
-      return tableData
+      let tableDataTemp = this.$devTools.deepCopy(tableData)
+
+      return tableDataTemp
     },
   },
   watch: {
@@ -81,9 +89,13 @@ export default {
           let selectTempArr = []
           this.multipleSelection.map((row) => {
             this.tableData.map((item) => {
-              if (row.value == item.value) selectTempArr.push(item)
+              if (row.value == item.value) {
+                item.weight = row.weight
+                selectTempArr.push(item)
+              }
             })
           })
+
           this.toggleSelection(selectTempArr)
         })
       },
@@ -101,7 +113,12 @@ export default {
         this.selectStr = ''
         if (!this.$devTools.isNullorUndefined(this.multipleSelection)) {
           this.multipleSelection.map((item, index, arr) => {
-            this.selectStr += arr.length - 1 !== index ? `${item.value},` : `${item.value}`
+            let currentStr = `${item.value}`
+            for (let i = 0; i < item.weight; i++) {
+              currentStr = '{' + currentStr
+              currentStr = currentStr + '}'
+            }
+            this.selectStr += arr.length - 1 !== index ? `${currentStr},` : `${currentStr}`
           })
         }
       },

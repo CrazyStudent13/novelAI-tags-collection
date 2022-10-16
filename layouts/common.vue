@@ -15,7 +15,7 @@
 
       <!-- 主体内容 -->
       <div class="app-body">
-        <nuxt :key="key" />
+        <nuxt />
       </div>
     </el-main>
   </el-container>

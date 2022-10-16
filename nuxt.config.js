@@ -17,11 +17,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
       { rel: 'stylesheet', href: 'http://at.alicdn.com/t/font_3202885_9p4m8dagmyh.css' },
     ],
-    // script: [
-    //   {
-    //     src: '//at.alicdn.com/t/font_3202885_9p4m8dagmyh.js',
-    //   },
-    // ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -71,7 +66,8 @@ export default {
     },
   },
   router: {
-    base: process.env.NODE_ENV === 'production' ? '/dist' : '/',
+    mode: 'hash',
+    // base: process.env.NODE_ENV === 'production' ? '/dist' : '/',
     routeNameSplitter: '/',
     extendRoutes(routes, resolve) {
       // 路由筛选，将components文件的路由去除，防止出意外

@@ -1,7 +1,7 @@
 <template>
   <div class="pageSider">
     <el-menu :default-active="activeMenu" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-      <el-menu-item v-for="(menu, index) in tags" :key="index" :index="menu.group_value" @click.native="handleMenuClick(menu)">
+      <el-menu-item v-for="(menu, index) in tagsOptions" :key="index" :index="menu.group_value" @click.native="handleMenuClick(menu)">
         <span slot="title">
           {{ menu.group_name }}
         </span>
@@ -21,21 +21,24 @@ export default {
       activeMenu: '',
     }
   },
-  watch: {
-    // $route: {
-    //   handler(val) {
-    //     // 默认加入第一组标签
-    //     this.$nextTick(() => {
-    //       this.activeMenu = this.tags[0].group_value
-    //       this.handleMenuClick(this.tags[0])
-    //     })
-    //   },
-    //   deep: true,
-    // },
+  computed: {
+    tagsOptions() {
+      let optionsTemp = tags.concat(tags_r18)
+      return optionsTemp
+    },
   },
   methods: {
     handleMenuClick(menu) {
-      this.$store.dispatch('app/setMenu', menu)
+      if (this.$router.path !== '/') {
+        this.$router.push({
+          path: '/',
+        })
+        this.$nextTick(() => {
+          this.$store.dispatch('app/setMenu', menu)
+        })
+      } else {
+        this.$store.dispatch('app/setMenu', menu)
+      }
     },
   },
   created() {
