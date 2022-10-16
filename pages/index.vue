@@ -95,7 +95,7 @@ export default {
               }
             })
           })
-
+          this.changeWeight()
           this.toggleSelection(selectTempArr)
         })
       },
@@ -107,20 +107,7 @@ export default {
         this.multipleSelection.push(...val)
         this.multipleSelection = this.$devTools.arrObjDistinct(this.multipleSelection, 'value')
 
-        // // 找出当前表中未选中的字段, 并移除这些未选中的字段
-        // this.currentNoSelection = this.$devTools.deepCopy(this.tagsTable) || []
-
-        this.selectStr = ''
-        if (!this.$devTools.isNullorUndefined(this.multipleSelection)) {
-          this.multipleSelection.map((item, index, arr) => {
-            let currentStr = `${item.value}`
-            for (let i = 0; i < item.weight; i++) {
-              currentStr = '{' + currentStr
-              currentStr = currentStr + '}'
-            }
-            this.selectStr += arr.length - 1 !== index ? `${currentStr},` : `${currentStr}`
-          })
-        }
+        this.changeWeight()
       },
       deep: true,
     },
@@ -129,6 +116,20 @@ export default {
     this.tagsTable = this.tableData
   },
   methods: {
+    // 修改权重
+    changeWeight() {
+      this.selectStr = ''
+      if (!this.$devTools.isNullorUndefined(this.multipleSelection)) {
+        this.multipleSelection.map((item, index, arr) => {
+          let currentStr = `${item.value}`
+          for (let i = 0; i < item.weight; i++) {
+            currentStr = '{' + currentStr
+            currentStr = currentStr + '}'
+          }
+          this.selectStr += arr.length - 1 !== index ? `${currentStr},` : `${currentStr}`
+        })
+      }
+    },
     // 移除已选标签
     handleClose(tag) {
       // 总标签列表已选移除
