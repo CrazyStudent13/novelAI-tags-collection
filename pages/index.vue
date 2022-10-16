@@ -214,8 +214,8 @@ export default {
 
 <style lang="less">
 .tags-operate {
-  border-top: 1px solid #cccc;
   &-header {
+    border-bottom: 1px solid #cccc;
     position: sticky;
     top: 0;
     z-index: 999;

@@ -36,6 +36,16 @@ export default {
       ],
     }
   },
+  watch: {
+    $route: {
+      handler(val) {
+        this.subMenuList.map((item) => {
+          if (val.path == item.path) this.activeIndex = item.label
+        })
+      },
+      deep: true,
+    },
+  },
   methods: {
     handleSelect(subMenu) {
       if (!this.$devTools.isNullorUndefined(subMenu.path)) {
@@ -55,11 +65,18 @@ export default {
 
 <style lang="less" scoped>
 .headerMenu {
-  position: relative;
+  border-bottom: 1px solid #cccc;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
   width: 100%;
-  height: 60px;
+  min-height: 59px;
   line-height: 60px;
   background: white;
+  padding: 0px 16px;
+  padding-top: 0px;
+  margin-bottom: 16px;
 }
 
 .businessContact {

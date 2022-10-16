@@ -46,8 +46,11 @@ export default {
 }
 
 .sidebar-logo-container {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 200px;
   height: 60px;
   line-height: 60px;
   background: #2b2f3a;
