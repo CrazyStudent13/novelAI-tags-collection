@@ -20,6 +20,7 @@
       <el-menu-item v-for="(item, index) in subMenuList" :index="item.label" :key="index" @click="handleSelect(item)">
         {{ item.label }}
       </el-menu-item>
+      <el-menu-item @click="href"> 源码 </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -32,7 +33,6 @@ export default {
       subMenuList: [
         { label: '首页', path: '/' },
         { label: '说明', path: '/about' },
-        { label: '源码', url: 'https://github.com/CrazyStudent13/novelAI-tags-collection.git' },
       ],
     }
   },
@@ -55,6 +55,9 @@ export default {
       } else {
         window.open(subMenu.url)
       }
+    },
+    href() {
+      window.open('https://github.com/CrazyStudent13/novelAI-tags-collection.git')
     },
   },
   created() {
